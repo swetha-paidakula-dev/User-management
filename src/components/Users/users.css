@@ -1,5 +1,7 @@
 .usertable{
     border-collapse: collapse;
+    padding: 5px;
+    margin: auto;
 }
 
 table,th,td {
@@ -9,4 +11,18 @@ table,th,td {
 
 th,td{
     padding: 13px;
+}
+.button{
+    height:26px;
+    font-weight: bold;
+    border: 1px solid;
+    margin: 10px;
+    color: blueviolet;
+}
+.button1{
+    height:18px;
+    font-weight: bold;
+    border: 1px solid;
+    margin: 8px;
+    color: blue;
 }
