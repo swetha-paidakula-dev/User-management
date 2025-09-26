@@ -3,7 +3,7 @@ import Users from "../Users/users";
 const Home = () => {
     return (
         <div>
-            <h1>User Management System</h1>
+            <h1 className="heading">User Management System</h1>
             <Users />
         </div>
     )

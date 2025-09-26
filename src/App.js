@@ -14,7 +14,9 @@
 // export default App;
 import { Routes, Route } from "react-router-dom";
 import Users from "./components/Users/users";
-import AddUser from "./components/Adduser";
+import Adduser from "./components/Adduser";
+import Edituser from "./components/Edituser";
+import Deleteuser from "./components/Deleteuser";
 import './index.css'
 
 function App() {
@@ -22,7 +24,10 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Users />} />
-        <Route path="/add-user" element={<AddUser />} />
+        <Route path="/add-user" element={<Adduser />} />
+        <Route path="/edit-user" element={<Edituser />} />
+        <Route path="/delete-user" element={<Deleteuser />} />
+        <Route path="/home" element={<Users />} />
       </Routes>
     </div>
   );

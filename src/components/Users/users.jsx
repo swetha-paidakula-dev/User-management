@@ -5,9 +5,11 @@ import './users.css'
 
 const Users = () => {
     const [users,setUser] = useState([]);
+    const [searchInput, setSearchInput] = useState('')
     const navigate = useNavigate();
+    const searchViewbox = event => setSearchInput(event.target.value)
     useEffect(() => {
-        fetch('http://localhost:4000/users/')
+        fetch('http://localhost:4000/user/')
         .then(response => response.json())
       .then(data => {
         setUser(data);
@@ -18,12 +20,31 @@ const Users = () => {
         alert("error while fetching user details")
       });
     },[])
-   
+
+  const filterusers = users.filter(each =>
+    each.first_name.toLowerCase().includes(searchInput.toLowerCase()) ||
+    each.last_name.toLowerCase().includes(searchInput.toLowerCase()) ||
+    each.email.toLowerCase().includes(searchInput.toLowerCase()) ||
+    each.department.toLowerCase().includes(searchInput.toLowerCase())
+  )
+  
+    if (searchInput !== '' && filterusers.length === 0){
+    alert("No details found");
+  }
+
     return(
         <><h1>User Management System</h1><div>
+            <div>
             <Link to="/add-user" className="button">
                 ADD USER
             </Link>
+            <input 
+            type="text"
+            placeholder="Search by first_name,last_name,email or department"
+            value={searchInput}
+            onChange={searchViewbox}
+            />
+            </div>
             <table className="usertable">
                 <thead>
                     <tr>
@@ -36,7 +57,7 @@ const Users = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) => (
+                    {filterusers.map((user) => (
                         <tr
                             key={user.id}>
                             <td>{user.id}</td>
@@ -45,8 +66,12 @@ const Users = () => {
                             <td>{user.email}</td>
                             <td>{user.department}</td>
                             <td>
-                                <button className="button1">Edit</button>
-                                <button className="button1">Delete</button>
+                                <Link to="/edit-user" className="button1">
+                                    Edit
+                                </Link>
+                                <Link to={'/delete-user?id=${user.id}'} className="button1">
+                                Delete
+                                </Link>
                             </td>
 
                         </tr>
@@ -54,7 +79,7 @@ const Users = () => {
                     ))}
 
                 </tbody>
-            </table>
+            </table>    
         </div></>
     )
 }

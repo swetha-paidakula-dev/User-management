@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import Users from './components/users';
+import { Link } from "react-router-dom"
+
+//import Users from './components/Users';
+import {useNavigate} from 'react-router-dom';
 
 const Form = ( ) => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         id: '',
         first_name: '',
@@ -14,39 +18,52 @@ const Form = ( ) => {
     event.preventDefault();
 
     fetch('http://localhost:4000/users/', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(userdata)
     })
     .then(response => {
         if (response.ok) {
-            alert("User added successfully")
+            alert("user edited successfully")
             return response.json(); 
         } else {
-            alert("Failed to add user");
+            alert("Failed to edit user")
         }
     })
     .catch(error => {
         console.error(error);
-        alert("Error while adding user");
+        alert("Error while editing user");
     });
 };
 
     return (
-        <div>
+        <div className="container">
         <h1>User Management Form</h1>
-        <label>id</label>
-        <input type="text" name="id" placeholder="Enter id"/>
+        <div>
         <label>First Name</label>
-        <input type="text" name="First Nmae" placeholder="Enter first-name"/>
+        <input type="text" name="First Nmae" placeholder="Enter first-name"
+        value={formData.first_name}
+        onChange={(event) => setFormData({...formData,first_name:event.target.value})}/>
+        </div><div>
         <label>Last Name</label>
-        <input type="text" name="Last Name" placeholder="Enter last-name" />
+        <input type="text" name="Last Name" placeholder="Enter last-name" 
+        value={formData.last_name}
+        onChange={(event) => setFormData({...formData,last_name:event.target.value})}/>
+        </div><div>
         <label>Email</label>
-        <input type="text" name="Email" placeholder="Enter email"/>
+        <input type="text" name="Email" placeholder="Enter email"
+        value={formData.email}
+        onChange={(event) => setFormData({...formData,email:event.target.value})}/>
+        </div><div>
         <label>Department</label>
-        <input type="text" name="Department" placeholder="Enter department"/>
+        <input type="text" name="Department" placeholder="Enter department"
+        value={formData.department}
+        onChange={(event) => setFormData({...formData,department:event.target.value})}/>
+        </div>
+        <button onClick={userdata}>Edit User</button>
+
     </div>
     )
 }

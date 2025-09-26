@@ -41,9 +41,10 @@ initializeDBAndServer();
 
 
 //  Get all users
-app.get('/users/', async (request, response) => {
+app.get('/user/', async (request, response) => {
   const query = `SELECT * FROM user;`;
   const users = await db.all(query);
+  console.log(users);
   response.send(users);
 });
 
@@ -56,6 +57,7 @@ app.post('/user/', async (request, response) => {
     VALUES ('${first_name}', '${last_name}', '${email}', '${department}');
   `;
   const dbResp =await db.run(query);
+  console.log(dbResp);
   response.send(`User Successfully Added with ${dbResp.lastID}`);
 
 });
@@ -77,6 +79,7 @@ app.put('/user/:id/', async (request, response) => {
   `;
 
   await db.run(query);
+  console.log(query);
   response.send('User Details Updated');
 });
 
@@ -86,6 +89,7 @@ app.delete('/user/:id/', async (request, response) => {
   const { id } = request.params;
   const query = `DELETE FROM user WHERE id = ${id};`;
   await db.run(query);
+  console.log(query);
   response.send('User Removed');
 });
 

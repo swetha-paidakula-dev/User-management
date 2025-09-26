@@ -16,7 +16,7 @@ th,td{
     height:26px;
     font-weight: bold;
     border: 1px solid;
-    margin: 10px;
+    margin: auto;
     color: blueviolet;
 }
 .button1{
@@ -25,4 +25,18 @@ th,td{
     border: 1px solid;
     margin: 8px;
     color: blue;
+}
+.input-element {
+  width: 50%;
+  height: 100%;
+  background-color: transparent;
+  border-left-style: solid;
+  border-left-width: 1px;
+  font-size: 10px;
+  padding: 6px;
+  margin: 8px;
+}
+.heading{
+    margin: auto;
+    padding: auto;
 }
